@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10.0 FATAL_ERROR)
 
-project (winflexbison C)
+project(winflexbison VERSION 2.5.25 LANGUAGES C)
 
 if(NOT MSVC)
    message( WARNING "Visual Studio Build supported only" )
@@ -88,9 +88,9 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
     set(ENV_VERSION "$ENV{WINFLEXBISON_VERSION}")
     if(NOT ENV_VERSION)
-      set(CPACK_PACKAGE_VERSION "master" CACHE STRING "Complete version of the created package.")
+      set(CPACK_PACKAGE_VERSION "dev-${PROJECT_VERSION}" CACHE STRING "Complete version string of the created package.")
     else()
-      set(CPACK_PACKAGE_VERSION "${ENV_VERSION}" CACHE STRING "Complete version of the created package.")
+      set(CPACK_PACKAGE_VERSION "${ENV_VERSION}" CACHE STRING "Complete version string of the created package.")
     endif()
 
     set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)

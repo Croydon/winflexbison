@@ -19,6 +19,11 @@ add_definitions(-Drestrict=__restrict)
 
 if(WIN32 AND NOT MSVC)
   add_definitions(-Dmode_t=int)
+
+  #if(CMAKE_C_COMPILER_ID STREQUAL "Clang")
+    #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fms-compatibility -fms-extensions")
+    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fms-compatibility -fms-extensions")
+  #endif()
 endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /W3 /MD /Od /Zi /EHsc")

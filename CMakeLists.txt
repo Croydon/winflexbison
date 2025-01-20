@@ -22,6 +22,10 @@ add_definitions(-Dinline=__inline)
 # next line needed for VS2017 only
 add_definitions(-Drestrict=__restrict)
 
+if(WIN32 AND NOT MSVC)
+  add_definitions(-Dmode_t=int)
+endif()
+
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /W3 /MD /Od /Zi /EHsc")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /W3 /GL /Od /Oi /Gy /Zi /EHsc")
 

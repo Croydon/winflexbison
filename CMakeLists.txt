@@ -17,7 +17,7 @@ add_definitions(-Dinline=__inline)
 # next line needed for VS2017 only
 add_definitions(-Drestrict=__restrict)
 
-if(WIN32 AND NOT MSVC)
+if(WIN32)
   add_definitions(-Dmode_t=int)
 
   #if(CMAKE_C_COMPILER_ID STREQUAL "Clang")

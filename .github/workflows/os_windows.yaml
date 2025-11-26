@@ -63,7 +63,7 @@ jobs:
         -DFLEX_EXECUTABLE="${{ github.workspace }}\install\bin\win_flex.exe" \
         -DBISON_EXECUTABLE="${{ github.workspace }}\install\bin\win_bison.exe" \
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        cmake --build flex/tests/build --config ${ { matrix.build_type } }
+        cmake --build flex/tests/build --config "${{ matrix.build_type }}"
         ctest --test-dir flex/tests/build --output-on-failure
 
     - name: Create package

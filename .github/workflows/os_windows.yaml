@@ -46,22 +46,20 @@ jobs:
     - name: "Configure CMake"
       if: matrix.compiler == 'clang-cl'
       run: | 
-        cmake -S . -B build -G "Ninja" -DCMAKE_C_COMPILER=${{ matrix.compiler }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCPACK_PACKAGE_VERSION="$env:PACKAGE_VERSION" -DUSE_STATIC_RUNTIME=ON
+        cmake -S . -B build -G "Ninja" -DCMAKE_C_COMPILER=${{ matrix.compiler }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCPACK_PACKAGE_VERSION="$env:PACKAGE_VERSION" -DUSE_STATIC_RUNTIME=ON -DCMAKE_INSTALL_PREFIX="${{ github.workspace }}\install"
 
     - name: Build with CMake
       run: cmake --build build --config "${{ matrix.build_type }}"
 
     - name: "CMake Install"
       run: |
-        mkdir install
-        cmake -S . -B install -G "Ninja" -DCMAKE_C_COMPILER=${{ matrix.compiler }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=$(pwd)/install -DUSE_STATIC_RUNTIME=ON
-        cmake --build install --config "${{ matrix.build_type }}" --target install
+        cmake --build build --config "${{ matrix.build_type }}" --target install
 
     - name: "Run Flex tests"
       run: |
         cmake -S flex/tests -B flex/tests/build -G "Ninja" \
-        -DFLEX_EXECUTABLE="${{ github.workspace }}\install\bin\win_flex.exe" \
-        -DBISON_EXECUTABLE="${{ github.workspace }}\install\bin\win_bison.exe" \
+        -DFLEX_EXECUTABLE="${{ github.workspace }}\install\win_flex.exe" \
+        -DBISON_EXECUTABLE="${{ github.workspace }}\install\win_bison.exe" \
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         cmake --build flex/tests/build --config "${{ matrix.build_type }}"
         ctest --test-dir flex/tests/build --output-on-failure

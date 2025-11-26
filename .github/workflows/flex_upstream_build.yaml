@@ -1,0 +1,31 @@
+# This is mostly the following upstream workflow file: https://github.com/westes/flex/blob/bf254c75b1e0d2641ebbd7fc85fb183f36a62ea7/.github/workflows/build.yml
+# Modifications:
+#   - Changed CI job name
+#   - Run all all pushes and pull_requests
+#   - Change directory to flex directory
+#   - Disable flex tests for now
+
+name: Flex GCC Upstream Build
+
+on: [push, pull_request]
+permissions: read-all
+
+jobs:
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+    - name: apt
+      run: sudo apt-get update && sudo apt-get install -y gcc autoconf automake libtool gettext autopoint bison help2man lzip texinfo texlive
+    - name: autogen
+      run: cd flex && ./autogen.sh
+    - name: configure
+      run: cd flex && ./configure
+    - name: make
+      run: cd flex && make
+#    - name: make check
+#      run: cd flex && make check
+#    - name: make distcheck
+#      run: cd flex && make distcheck

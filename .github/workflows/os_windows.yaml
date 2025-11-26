@@ -57,10 +57,7 @@ jobs:
 
     - name: "Run Flex tests"
       run: |
-        cmake -S flex/tests -B flex/tests/build -G "Ninja" \
-        -DFLEX_EXECUTABLE="${{ github.workspace }}\install\win_flex.exe" \
-        -DBISON_EXECUTABLE="${{ github.workspace }}\install\win_bison.exe" \
-        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        cmake -S flex/tests -B flex/tests/build -G "Ninja" -DFLEX_EXECUTABLE="${{ github.workspace }}\install\win_flex.exe" -DBISON_EXECUTABLE="${{ github.workspace }}\install\win_bison.exe" -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         cmake --build flex/tests/build --config "${{ matrix.build_type }}"
         ctest --test-dir flex/tests/build --output-on-failure
 

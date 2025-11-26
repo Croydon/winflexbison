@@ -7,9 +7,15 @@ function(add_flex_test TESTNAME LEXFILE INPUTFILE)
     set(TEST_L "${CMAKE_CURRENT_SOURCE_DIR}/${LEXFILE}")
     set(GENERATED_C "${CMAKE_CURRENT_BINARY_DIR}/${TESTNAME}_lex.yy.c")
 
+    if(WIN32)
+        set(WINCOMPAT " --wincompat")
+    else()
+        set(WINCOMPAT "")
+    endif()
+
     add_custom_command(
         OUTPUT "${GENERATED_C}"
-        COMMAND ${FLEX_EXECUTABLE} -o "${GENERATED_C}" "${TEST_L}"
+        COMMAND ${FLEX_EXECUTABLE}${WINCOMPAT} -o "${GENERATED_C}" "${TEST_L}"
         MAIN_DEPENDENCY "${TEST_L}"
         COMMENT "Generating ${GENERATED_C} from ${TEST_L}"
         VERBATIM

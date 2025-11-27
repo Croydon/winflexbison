@@ -1,0 +1,87 @@
+{
+    "version": 10,
+    "configurePresets": [
+        {
+            "name": "x64-Release",
+            "displayName": "Ninja x64 Release",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/x64-Release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/x64-Release"
+            }
+        },
+        {
+            "name": "x64-RelWithDebInfo",
+            "displayName": "Ninja x64 RelWithDebInfo",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/x64-RelWithDebInfo",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/x64-RelWithDebInfo"
+            }
+        },
+        {
+            "name": "x64-Debug",
+            "displayName": "Ninja x64 Debug",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/x64-Debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/x64-Debug"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "build-x64-Release",
+            "configurePreset": "x64-Release",
+            "configuration": "Release"
+        },
+        {
+            "name": "build-x64-RelWithDebInfo",
+            "configurePreset": "x64-RelWithDebInfo",
+            "configuration": "RelWithDebInfo"
+        },
+        {
+            "name": "build-x64-Debug",
+            "configurePreset": "x64-Debug",
+            "configuration": "Debug"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "test-x64-Release",
+            "configurePreset": "x64-Release",
+            "configuration": "Release",
+            "environment": {
+                "PATH": "${sourceDir}/install/x64-Release;$penv{PATH}"
+            },
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+        {
+            "name": "test-x64-RelWithDebInfo",
+            "configurePreset": "x64-RelWithDebInfo",
+            "configuration": "RelWithDebInfo",
+            "environment": {
+                "PATH": "${sourceDir}/install/x64-RelWithDebInfo;$penv{PATH}"
+            },
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+        {
+            "name": "test-x64-Debug",
+            "configurePreset": "x64-Debug",
+            "configuration": "Debug",
+            "environment": {
+                "PATH": "${sourceDir}/install/x64-Debug;$penv{PATH}"
+            },
+            "output": {
+                "outputOnFailure": true
+            }
+        }
+    ]
+}

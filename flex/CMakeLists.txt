@@ -29,3 +29,9 @@ add_library(fl STATIC
 
 target_include_directories(fl
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+
+
+include(CTest)
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()
